@@ -2,7 +2,7 @@
 
 ## Model name
 
-**mtDNA Dual-Reporter Programmability Simulator**
+Repairable Human Biology proof-of-concept models
 
 ## Model version
 
@@ -10,214 +10,188 @@ Version 1.0
 
 ## Model type
 
-This is a **mechanistically informed simulation and analysis framework** that combines:
+This repository contains two supervised machine-learning models:
 
-- synthetic biological data generation
-- rule-based serial barrier modeling
-- supervised machine learning
-- feature-importance analysis
-- visualization of design space
+1. **Random forest classifier**
+   - predicts whether a simulated biological sample has an **open repair window** or a **closing/closed repair window**
 
-It is not a single predictive model only. It is a pipeline that produces synthetic datasets and then trains multiple predictive models on those datasets.
+2. **Random forest regressor**
+   - predicts a continuous **repairability score**
+
+These models are trained on a synthetic, literature-informed molecular dataset.
 
 ## Summary
 
-The framework models mitochondrial programmability for an engineered **mtDNA-like nucleic acid cargo** carrying **mtNanoLuc** and **sfGFP**.
-
-The model assumes that successful mitochondrial programming depends on sequential passage through several stages:
-
-- cell entry
-- intracellular trafficking
-- mitochondrial docking
-- membrane and matrix access
-- matrix retention
-- target engagement
-- downstream functional rescue
-
-The overall score, `Phi_prog`, is computed as a product of step-specific probabilities. Downstream reporter outputs and mitochondrial-function variables are then generated.
-
-## Intended users
-
-This framework is intended for:
-
-- computational biologists
-- mitochondrial biologists
-- synthetic biologists
-- drug-delivery researchers
-- students learning systems modeling
-- researchers exploring organelle engineering design spaces
+The models are designed as proof-of-concept tools to test whether integrated molecular variables can be used to represent and predict biological repairability. They are not intended for clinical use and should not be interpreted as validated biological instruments.
 
 ## Intended use
 
-Appropriate uses include:
+### Appropriate use
 
-- exploring which features may influence mitochondrial cargo success
-- ranking hypothetical delivery designs
-- studying serial biological bottlenecks
-- generating synthetic benchmark datasets
-- supporting conceptual manuscript development
-- planning future experimental studies
+These models are intended for:
 
-## Out-of-scope use
+- conceptual exploration of repairability as a systems property
+- hypothesis generation
+- methodological demonstration
+- educational use
+- programme or grant development
+- benchmarking analysis pipelines for future real-world datasets
 
-This framework should not be used for:
+### Inappropriate use
 
-- clinical diagnosis
+These models must not be used for:
+
+- medical diagnosis
 - patient stratification
 - treatment selection
-- regulatory submission as experimental evidence
-- claims of validated mitochondrial gene delivery in humans
-- claims that mtNanoLuc-sfGFP mtDNA expression has been established experimentally in the exact form modeled here
+- clinical prognosis
+- commercial health claims
+- claims of biological rejuvenation or anti-ageing efficacy
 
-## Inputs
+## Training data
 
-The model uses simulated or derived values for features such as:
+The training data are **synthetic**. They were generated using literature-informed directional trends and representative ranges derived from peer-reviewed studies on:
 
-- payload size
-- engineered insert size
-- negative charge density
-- compactness
-- TPP-like targeting fraction
-- MTS-like targeting fraction
-- fusogenicity
-- endosomal escape
-- nuclease resistance
-- matrix binding
-- clearance rate
-- codon compatibility for mtNanoLuc
-- codon compatibility for sfGFP
-- promoter compatibility
-- UTR compatibility
-- bicistronic burden
-- replication compatibility
-- mitochondrial membrane potential
-- ATP availability
-- TOM/TIM competence
-- PAM activity
-- nucleoid access
-- baseline ROS
-- baseline OCR
+- ageing hallmarks
+- cellular senescence
+- mitochondrial dysfunction
+- oxidative stress
+- proteostasis decline
+- inflammatory mtDNA signaling
 
-## Outputs
+No real patient-level or experimental sample-level data were used.
 
-The framework produces:
+## Input features
 
-### Intermediate outputs
-- `P_cell`
-- `P_traffic`
-- `P_dock`
-- `P_transloc`
-- `P_retain`
-- `P_engage`
-- `Phi_prog`
+The models use the following features:
 
-### Reporter outputs
-- `mtNanoLuc_signal`
-- `sfGFP_signal`
+- age_years
+- ros_fold_vs_young
+- atp_au
+- etc_activity_pct
+- mtdna_copy_index
+- gammaH2AX_foci
+- IL6_pg_ml_index
+- p16_expr_fold
+- p21_expr_fold
+- proteostasis_pct
+- autophagy_flux_pct
+- telomere_kbp
+- cytosolic_mtDNA_fold
 
-### Functional outputs
-- `ATP_post`
-- `OCR_post`
-- `ROS_post`
-- `Psi_m_abs_post`
-- `G_func`
+## Output targets
 
-### Labels
-- `successful_programming`
-- `strong_rescue`
+### Classifier target
+- `repair_window_open`
+  - 1 = repair window open
+  - 0 = repair window closing or closed
 
-## Training and evaluation
+### Regressor target
+- `repairability_score`
+  - continuous latent variable representing the degree of biological repair competence
 
-After simulation, the pipeline trains machine learning models for:
+## Model architecture
 
-### Classification
-To predict:
-- `successful_programming`
+### Classifier
+- algorithm: RandomForestClassifier
+- trees: 400
+- maximum depth: constrained
+- leaf size: constrained for regularization
 
-Models used:
-- Logistic Regression
-- Random Forest Classifier
-- Gradient Boosting Classifier
+### Regressor
+- algorithm: RandomForestRegressor
+- trees: 400
+- maximum depth: constrained
+- leaf size: constrained for regularization
 
-Metrics:
-- ROC-AUC
-- PR-AUC
-- Accuracy
-- F1 score
+## Performance
 
-### Regression
-To predict:
-- `G_func`
+Because the dataset is synthetic, performance metrics reflect **internal consistency within the simulated framework**, not real-world generalization.
 
-Models used:
-- Ridge Regression
-- Random Forest Regressor
-- Gradient Boosting Regressor
+Reported metrics in the notebook include:
 
-Metrics:
-- RMSE
+### Classifier
+- area under the ROC curve, AUC
+- accuracy
+- classification report
+
+### Regressor
 - R²
+- root mean squared error, RMSE
+- permutation feature importance
 
-## Performance summary
+These metrics should be interpreted as proof-of-concept indicators only.
 
-In the current synthetic run:
+## Factors influencing performance
 
-- successful programming rate was low
-- strong rescue events were rare
-- classification performance was strong
-- regression performance was weak
+Performance depends on:
 
-This suggests that the simulator currently defines a clearer binary success boundary than a smooth continuous rescue landscape.
+- how the synthetic data were generated
+- the weights used to define the latent repairability score
+- the amount of simulated noise
+- the chosen feature distributions
+- the age-group and tissue modifiers
 
-## Model assumptions
+The models may perform very differently on real experimental data.
 
-The framework assumes:
+## Biological interpretation
 
-1. Mitochondrial programming is a serial multi-step process.
-2. Failure at one major step can strongly reduce final success.
-3. Membrane potential, ATP, import competence, and targeting chemistry influence access.
-4. Large nucleic-acid payloads face stronger transport penalties than small molecules.
-5. Reporter output depends on both delivery success and expression compatibility.
-6. Functional rescue depends on both reporter-associated success and mitochondrial-state variables.
+The models operationalize the idea that repairability emerges from the interaction of:
 
-## Limitations
+- oxidative stress
+- energy metabolism
+- DNA-damage burden
+- senescence-marker expression
+- inflammatory reinforcement
+- proteostasis
+- autophagic capacity
+- telomere integrity
+- mtDNA-linked distress signaling
 
-### Synthetic nature
-All training and evaluation data are simulated.
-
-### Mechanistic simplification
-The framework uses biologically motivated abstractions for mitochondrial access and expression. These abstractions are not direct measurements of all real mitochondrial processes.
-
-### Cargo-specific uncertainty
-The exact dual-reporter mtDNA-like construct is hypothetical in this framework.
-
-### Generalization limitation
-Because the model is trained on synthetic data, strong performance on the synthetic classification task does not imply strong real-world predictive power.
-
-## Bias and risk considerations
-
-Potential risks include:
-
-- overinterpreting synthetic results as experimental fact
-- assuming feature importance directly reflects real biological causality
-- using the model outside its intended research-exploration context
-- treating simulated expression compatibility as proof of real mitochondrial gene expression feasibility
+In this framework, higher repairability is associated with:
+- lower ROS
+- lower γH2AX
+- lower IL-6
+- lower p16 and p21
+- higher ATP
+- higher ETC activity
+- stronger proteostasis
+- stronger autophagy
+- longer telomeres
 
 ## Ethical considerations
 
-This repository is meant for computational exploration and should be used transparently. Any downstream claims should clearly state that the current framework is synthetic and hypothesis-generating.
+These models concern ageing, resilience, and repair biology, all of which can easily be overinterpreted. Care must therefore be taken not to misrepresent this repository as evidence of a validated rejuvenation technology.
 
-## Maintenance
+Key ethical cautions include:
 
-This model card should be updated when:
+- synthetic data do not justify clinical claims
+- biological ageing is heterogeneous and context-dependent
+- real interventions aimed at reopening repair windows may carry risks, including cancer promotion if cellular plasticity is unsafely manipulated
+- computational proxies for repairability may overlook important tissue-specific and organism-level factors
 
-- feature definitions change
-- equations are recalibrated
-- new datasets are introduced
-- experimental data are incorporated
-- evaluation strategy is changed
+## Limitations
 
-## Contact
+- The dataset is fully synthetic.
+- The target score is model-defined, not experimentally measured.
+- The models are not externally validated.
+- No causal inference is established.
+- Tissue contexts are simplified.
+- Intervention simulations are heuristic and not pharmacological models.
 
-**Mark I.R. Petalcorin**  
-Add preferred contact information here.
+## Recommendations for future model development
+
+Future versions should include:
+
+- real longitudinal omics datasets
+- experimental perturbation data
+- external validation cohorts
+- interpretable causal models
+- uncertainty estimation
+- safer biological constraints
+- multi-omics integration
+- tissue-specific repairability models
+
+## Citation
+
+**Petalcorin, M.I.R.** (2026). Repairable Human Biology proof-of-concept models. https://github.com/mpetalcorin/Repairable-Human-Biology
