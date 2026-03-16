@@ -6,7 +6,7 @@ A literature-informed computational proof of concept for modeling molecular repa
 
 This repository presents a computational proof of concept for **Repairable Human Biology**, a framework that treats biological repairability as a measurable molecular state. Rather than focusing only on damage accumulation, the project asks whether ageing and chronic decline can be understood as the progressive loss of the body's ability to repair itself.
 
-The repository contains a Jupyter notebook that generates a synthetic, literature-informed dataset benchmarked to peer-reviewed PubMed-indexed ageing and senescence literature. The notebook then performs descriptive analysis, state-space analysis, machine-learning prediction, and in silico intervention testing to explore whether repairability can be modeled as an integrated biological property.
+The repository contains a notebook that generates a synthetic, literature-informed dataset benchmarked to peer-reviewed  ageing and senescence literature. The notebook then performs descriptive analysis, state-space analysis, machine-learning prediction, and in silico intervention testing to explore whether repairability can be modeled as an integrated biological property.
 
 ## Core idea
 
@@ -85,10 +85,10 @@ This project is based on the idea that ageing may be interpreted as a progressiv
 ## Important limitations
 
 This repository is a proof of concept and not an experimental study.
-	•	The dataset is synthetic.
-	•	The repairability score is computationally constructed.
-	•	The intervention effects are simulated predictions.
-	•	The results should not be interpreted as clinical, diagnostic, or therapeutic claims.
+- The dataset is synthetic.
+- The repairability score is computationally constructed.
+- The intervention effects are simulated predictions.
+- The results should not be interpreted as clinical, diagnostic, or therapeutic claims.
 
 The value of the repository lies in formalizing a new hypothesis in a transparent and testable way.
 
@@ -111,11 +111,11 @@ Suggested packages:
 pip install numpy pandas matplotlib scikit-learn jupyter
 ```
 Example research questions supported by this repository
-	•	Can repairability be represented as a molecular state?
-	•	Which molecular variables best predict open versus closing repair windows?
-	•	Does ageing-like decline emerge as a systems-level transition?
-	•	Are coordinated rescue strategies predicted to outperform single-axis interventions?
-	•	Can this framework guide future experimental studies in ageing, senescence, and resilience biology?
+- Can repairability be represented as a molecular state?
+- Which molecular variables best predict open versus closing repair windows?
+- Does ageing-like decline emerge as a systems-level transition?
+- Are coordinated rescue strategies predicted to outperform single-axis interventions?
+- Can this framework guide future experimental studies in ageing, senescence, and resilience biology?
 
 ## Intended use
 
@@ -135,12 +135,12 @@ It is not intended for:
 ## Future directions
 
 Potential next steps include:
-	•	validation in aged primary-cell datasets
-	•	integration with real omics or imaging data
-	•	organoid-based repair-window mapping
-	•	perturbation modeling of rejuvenation strategies
-	•	multimodal machine-learning models for repair-state prediction
-	•	bounded intervention modeling for safe reopening of repair windows
+- validation in aged primary-cell datasets
+- integration with real omics or imaging data
+- organoid-based repair-window mapping
+- perturbation modeling of rejuvenation strategies
+- multimodal machine-learning models for repair-state prediction
+- bounded intervention modeling for safe reopening of repair windows
 
 ## References
 
@@ -154,6 +154,6 @@ Roger, L., Tomas, F., & Gire, V. (2021). Mechanisms and regulation of cellular s
 
 Victorelli, S., Douglass, S. M., Haley, K. J., et al. (2023). Apoptotic stress causes mtDNA release during senescence and drives the SASP. Nature, 622(7983), 627–636. https://www.nature.com/articles/s41586-023-06621-4
 
-Citation
+## Citation
 
-Petalcorin, M.I.R. (2026). Repairable Human Biology. https://github.com/mpetalcorin/Repairable-Human-Biology
+**Petalcorin, M.I.R.** (2026). Repairable Human Biology. https://github.com/mpetalcorin/Repairable-Human-Biology
