@@ -148,7 +148,8 @@ López-Otín, C., Blasco, M. A., Partridge, L., Serrano, M., & Kroemer, G. (2013
 
 López-Otín, C., Blasco, M. A., Partridge, L., Serrano, M., & Kroemer, G. (2023). Hallmarks of aging: An expanding universe. Cell, 186(2), 243–278. https://www.cell.com/cell/fulltext/S0092-8674(22)01377-0
 
-Mapuskar, K. A., Flippo, K. H., Schoenfeld, J. D., et al. (2017). Mitochondrial superoxide increases age-associated susceptibility of human dermal fibroblasts to radiation and chemotherapy. Cancer Research, 77(18), 5054–5067. https://aacrjournals.org/cancerres/article/77/18/5054/618240/Mitochondrial-Superoxide-Increases-Age-Associated
+Mapuskar, K. A., Flippo, K. H., Schoenfeld, J. D., et al. (2017). Mitochondrial superoxide increases age-associated susceptibility of human dermal fibroblasts to radiation and chemotherapy. Cancer Research, 77(18), 5054–5067. 
+https://doi.org/10.1158/0008-5472.CAN-17-0106
 
 Roger, L., Tomas, F., & Gire, V. (2021). Mechanisms and regulation of cellular senescence. International Journal of Molecular Sciences, 22(23), 13173. https://www.mdpi.com/1422-0067/22/23/13173
 
